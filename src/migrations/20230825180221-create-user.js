@@ -15,7 +15,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       display_name: {
-        allowNull:false,
         type: Sequelize.STRING
       },
       email: {
@@ -28,7 +27,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       image: {
-        allowNull: false,
         type: Sequelize.STRING
       }
     })
