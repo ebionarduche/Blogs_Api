@@ -9,7 +9,7 @@ const { email, password } = req.body;
     return res.status(400).json({ message: 'Some required fields are missing' });
   }
 
-const user = await userService.getByUserLogin(email, password);
+const user = await userService.getByUserLogin(email);
   if (!user) {
       return res.status(400).json({ message: 'Invalid fields' });
   }
