@@ -19,10 +19,21 @@ const findAllUsers = async (_req, res) => {
     const { password, ...userWithoutPassword } = user.dataValues;
     return userWithoutPassword;
   });
-  res.status(200).json(usersWithoutPassword);
+  return res.status(200).json(usersWithoutPassword);
+};
+
+const findUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await userService.getByUserId(id);
+  if (!user) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+  const { password, ...userWithoutPassword } = user.dataValues;
+  return res.status(200).json(userWithoutPassword);
 };
 
 module.exports = {
   createUser,
   findAllUsers,
+  findUserById,
 };
