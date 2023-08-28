@@ -12,6 +12,17 @@ const createUser = async (req, res) => {
   return res.status(201).json({ token });
 };
 
+const findAllUsers = async (_req, res) => {
+  const users = await userService.getUsers();
+
+  const usersWithoutPassword = users.map((user) => {
+    const { password, ...userWithoutPassword } = user.dataValues;
+    return userWithoutPassword;
+  });
+  res.status(200).json(usersWithoutPassword);
+};
+
 module.exports = {
   createUser,
+  findAllUsers,
 };
