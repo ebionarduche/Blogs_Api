@@ -16,9 +16,7 @@ const user = await userService.getByUserLogin(email);
 
 const { password: _password, ...userWithoutPassword } = user.dataValues;
     
-const payload = { userWithoutPassword };
-
-const token = createToken(payload);
+const token = createToken(userWithoutPassword);
 
 res.status(200).json({ token });
 };

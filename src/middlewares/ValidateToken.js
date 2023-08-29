@@ -1,10 +1,10 @@
 const { getPayload } = require('../auth/authfunctions');
 
 const ValidateToken = (req, res, next) => {
-  const { authorization } = req.headers;
-  if (!authorization) return res.status(401).json({ message: 'Token not found' });
   try {
-    const token = authorization.split(' ')[1];
+    const { authorization } = req.headers;
+    if (!authorization) return res.status(401).json({ message: 'Token not found' });
+    const [, token] = authorization.split(' ');
     const payload = getPayload(token);
     req.payload = payload;
     next();
@@ -13,6 +13,4 @@ const ValidateToken = (req, res, next) => {
   }
 };
 
-module.exports = {
-  ValidateToken,
-};
+module.exports = { ValidateToken };

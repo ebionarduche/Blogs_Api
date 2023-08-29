@@ -14,12 +14,7 @@ const createUser = async (req, res) => {
 
 const findAllUsers = async (_req, res) => {
   const users = await userService.getUsers();
-
-  const usersWithoutPassword = users.map((user) => {
-    const { password, ...userWithoutPassword } = user.dataValues;
-    return userWithoutPassword;
-  });
-  return res.status(200).json(usersWithoutPassword);
+  return res.status(200).json(users);
 };
 
 const findUserById = async (req, res) => {
