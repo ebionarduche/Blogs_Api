@@ -14,5 +14,3 @@ module.exports = {
   getCategoryByName,
   getByCategoryId,
 };
-
-// Funções Auxiliares retiradas da Aula 
