@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory } = require('../models');
+const { BlogPost, PostCategory, Category, User } = require('../models');
 
 const createPost = async (postData, categoryIds) => { 
   const post = await BlogPost.create(postData);
@@ -15,6 +15,16 @@ const createPost = async (postData, categoryIds) => {
 
 const getAllPosts = () => BlogPost.findAll();
 
+const getAllPostsCategorysAndUsers = async () => {
+  const posts = await BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },    
+    ],
+  });
+  return posts;
+};
+
 const getPostByTitle = (title) => BlogPost.findOne({ where: { title } });
 
 const getByPostById = (postId) => BlogPost.findByPk(postId);
@@ -24,6 +34,7 @@ module.exports = {
   getAllPosts,
   getPostByTitle,
   getByPostById,
+  getAllPostsCategorysAndUsers,
 };
 
 // Funções Auxiliares retiradas da Aula 
