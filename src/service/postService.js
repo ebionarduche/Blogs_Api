@@ -25,6 +25,17 @@ const getAllPostsCategorysAndUsers = async () => {
   return posts;
 };
 
+const getPostsCategorysAndUsersById = async (postId) => {
+  const post = await BlogPost.findOne({
+    where: { id: postId },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },    
+    ],
+  });
+  return post;
+};
+
 const getPostByTitle = (title) => BlogPost.findOne({ where: { title } });
 
 const getByPostById = (postId) => BlogPost.findByPk(postId);
@@ -35,6 +46,7 @@ module.exports = {
   getPostByTitle,
   getByPostById,
   getAllPostsCategorysAndUsers,
+  getPostsCategorysAndUsersById,
 };
 
 // Funções Auxiliares retiradas da Aula 
