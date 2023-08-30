@@ -14,5 +14,3 @@ module.exports = {
   getByUserLogin,
   getByUserId,
 };
-
-// Funções Auxiliares retiradas da Aula 
